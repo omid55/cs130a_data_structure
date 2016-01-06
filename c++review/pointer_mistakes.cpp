@@ -31,6 +31,14 @@ int main()
 	int *p2 = getPtrToEight();
 	cout << *p2 << endl;
 
+	// dangling pointer 3
+	double *a, *b;
+	a = new double(18.9);
+	b = a;
+	delete a;
+	cout << "a: " << a << endl << "b: " << b << endl;
+	cout << "*b: " << *b << endl;
+
 	// memory Leak
 	int *p3;
 	for (int i = 0; i < 3; ++i)
@@ -48,5 +56,4 @@ int main()
 
 	return 0;
 }
-
 
