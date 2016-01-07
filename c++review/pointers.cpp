@@ -1,7 +1,6 @@
 //Omid55
 // pointers & references in C++
 #include <iostream>
-#include <cstdio>
 using namespace std;
 
 int main()
@@ -24,6 +23,11 @@ int main()
 	int *d = new int(56);
 	cout << "d: " << d << endl << "*d: " << *d << endl << "&d: " << &d << endl << endl;
 
+	// free the memory of a pointer with delete
+	int* p = new int(10);
+	delete p;
+	//cout << "*p: " << *p << endl;
+
 	// pointer of pointer
 	int **e = &d;
 	cout << "e: " << e << endl << "*d: " << *e << endl << "**d: " << **e << endl << endl;
@@ -44,7 +48,6 @@ int main()
 	// just an address with no value
 	long* i = new long;
 	cout << "i: " << i << endl << "*i: " << *i << endl << endl;
-
 
 	return 0;
 }
