@@ -25,9 +25,22 @@ void increment_all (int* start, int* stop)
 
 int main()
 {
+	// how to iterate arrays with pointers
 	int numbers[] = {10,20,30};
 	increment_all (numbers,numbers+3);
 	print_all (numbers,numbers+3);
+
+	// 2 dimensional dynamic array
+	cout << endl;
+	int m = 5, n = 10;
+	double** a = new double*[m];
+	for(int i=0;i<m;i++)
+	{
+		a[i] = new double[n];
+	}
+	a[1][4] = 10.1;
+	cout << a[1][4] << endl;
+
 	return 0;
 }
 

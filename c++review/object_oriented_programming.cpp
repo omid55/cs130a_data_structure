@@ -76,7 +76,7 @@ public:
 
 	~MyClass2()
 	{
-		delete a;
+		delete a;     // since I am completely sure that it has been instantiated (new)
 		cout << "a is deleted" << endl;
 	}
 };
@@ -85,10 +85,11 @@ public:
 int main()
 {
 	MyClass c;
-	c = 5;  	// conversion constructor is called here
+	c = 5;  	// conversion constructor is called here  (see and check if it works for double or even string!!!)
 	cout << c.getX() << endl;
 
 	MyClass2 c2(10);
 	return 0;
 }
+
 

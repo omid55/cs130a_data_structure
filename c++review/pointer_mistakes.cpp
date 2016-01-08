@@ -48,7 +48,7 @@ int main()
 		// the cure is:   delete p3;
 	}
 
-	// deleting memory that is not allocated (new)
+	// deleting memory that is not allocated with new is incorrect
 	int x = 12;
 	int *xPtr = &x;
 	cout << *xPtr << endl;

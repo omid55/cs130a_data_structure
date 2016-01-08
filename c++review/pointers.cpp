@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
 	// normal int variable
-	int a = 55;
+	int a = 100;
 
 	// pointer to a (which is an int value)
 	int* b = &a;
@@ -26,11 +26,11 @@ int main()
 	// free the memory of a pointer with delete
 	int* p = new int(10);
 	delete p;
-	//cout << "*p: " << *p << endl;
+	//cout << "*p: " << *p << endl;    // it causes a runtime error
 
 	// pointer of pointer
 	int **e = &d;
-	cout << "e: " << e << endl << "*d: " << *e << endl << "**d: " << **e << endl << endl;
+	cout << "e: " << e << endl << "*e: " << *e << endl << "**e: " << **e << endl << endl;
 
 	// initialize a value with pointer
 	int f;
