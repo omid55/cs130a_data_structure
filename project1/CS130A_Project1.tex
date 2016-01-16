@@ -1,0 +1,188 @@
+\documentclass[times, 12pt]{article}
+\usepackage{graphicx}
+\oddsidemargin  0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\topmargin    0pt
+\headheight   0pt
+\headsep      0pt
+\textwidth  470pt
+\textheight 630pt
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygray}{rgb}{0.4,0.4,0.4}
+\definecolor{mygreen}{rgb}{0,0.8,0.6}
+\definecolor{myorange}{rgb}{1.0,0.4,0}
+
+\lstset{
+basicstyle=\footnotesize\sffamily\color{black},
+commentstyle=\color{mygray},
+frame=single,
+numbers=left,
+numbersep=5pt,
+numberstyle=\tiny\color{mygray},
+keywordstyle=\color{mygreen},
+showspaces=false,
+showstringspaces=false,
+stringstyle=\color{myorange},
+tabsize=2
+}
+
+\begin{document}
+\section*{CS130A Project 1 : Hash Table\\Due: Friday January 29, 2016 at midnight}
+
+\subsection*{Introduction}
+Key-value Stores have recently become a very popular alternative to cumbersome databases for
+cloud based applications. Commonly, each data item has a uniquely identifying key, and a
+value. Values can vary in size and type based on the application. In this programming
+project, we want to build a data structure which allows us to search and retrieve efficiently (both in time and in space) particular values given keys, not necessary in an ordered manner. For such applications, hash tables come in very handy.
+
+We will take the application of students' information retrieval for our hash table. The key-value pairs that will be used in this assignment are of the type (int, Student), where the int will be the 7 or less digits as the perm\# which is unique for each student, and Student is a class defining each student in the university with name (string) and GPA (double).
+
+\begin{lstlisting}
+    #include <string>
+    
+    class Student
+    {
+        private:
+        string name;
+        double gpa;
+    };
+\end{lstlisting}
+
+\subsection*{Project Statement}
+Your task in this project is to do the following:
+
+\begin{itemize}
+    \item Implement a hash table that takes in a 7-digit positive integer or less as a key and stores both the key and the associated Student object.
+    
+    \item Set the initial TABLE\_SIZE to be 5
+    
+    \item Collisions should be resolved through 2 following methods,
+    \begin{enumerate}
+        \item Linear probing: When searching for key $k$, in linear probing algorithm we examine the cell with index $h = hash(k);$ and increment $h$ until we find a value of $h$ for which the cell is free or contains the given key.
+        \item Double hashing: When searching for key $k$, in double hashing algorithm we first examine the cell with the same index as linear probing $h = hash1(k)$; nevertheless, another hash function is incrementally be added as follows:
+        $h = \Big(hash1(k) + i * hash2(k)\Big) \% TABLE\_SIZE;$
+    \end{enumerate}
+
+    \item Use the following hash functions:\\ \textit{hash1}($k$) = ($k$ \% $492113$) \% $TABLE\_SIZE$\\ \textit{hash1}($k$) = ($k$ \% $392113$) \% $TABLE\_SIZE$\\
+    Think about why this hash function might be suitable for this application?
+
+    \item Deletions should be supported through the \textbf{lazy deletion} method
+    
+    \item Dynamic Resizing should be supported such that the table size should be doubled if the load factor crosses over 0.7. Check if resizing is needed after inserting an element. When you resize, you should rehash the elements of the table in the order they are stored in the table (going from index 0 to index TABLE\_SIZE-1)
+\end{itemize}
+
+\subsection*{Required Functionality}
+Your hash table is supposed to support the following operations:\\
+\begin{itemize}
+    \item Insert(key,value): Insert an entry into the hashtable. Your program should return either "item successfully inserted," or "item already present."\\
+    
+    \item lookup(key): Use the hash table to determine if key is in the data structure and print its associated value and also the position separated by a single space (see the example below).
+    Your program should return either "item found; [value] [position]" or "item not found." See sample output below. Positions should be array indexed (beginning with 0)\\
+    
+    \item delete(key): Use the hash table to determine where key is, delete it from the hash table. Your program should return either "item successfully deleted" or "item not present in the table."\\
+    
+    \item print(): Print out the hash table (in the array format). For empty spots in the hash table, don't print anything.
+    
+    For consistency, you can assume that the sequence of operations is provided in ASCII format,
+    with each command on a separate line. In addition, your program should print out (one line per
+    command) information after each operation, as follows:
+    
+    \begin{itemize}
+        \item Insert(key,value): "item successfully inserted" or "item already present"
+        
+        \item lookup(key): "item found; [value] [position]" or "item not found"
+        (for instance after finding Kevin in index 5th, the string would be "item found; Kevin 5")
+        
+        \item delete(key): "item successfully deleted" or "item not present in the table"
+        
+        \item print(): prints out the whole hash table on the same line as two tuples of the format without space (int,string,double) as follows:\\
+        (1234,name1,gpa1)(2345,name2,gpa2)(3456,name3,gpa3)\\\\
+        \textbf{Note:} Since GPA is a double variable, in print function, you should always write it with 1 floating point. For instance, we can have 3.5, 4.0 and not 4.\\
+        In order to do this in C++, you can first include iomanip header in the beginning of your code as follows:
+        \begin{lstlisting}
+            #include <iomanip>
+        \end{lstlisting}
+        
+        Then use the following code to print gpa:
+        
+        \begin{lstlisting}[language=C++,
+            directivestyle={\color{black}}
+            emph={int,char,double,float,unsigned},
+            emphstyle={\color{green}}
+            ]
+            cout << std::fixed << std::setprecision(1) << gpa;
+        \end{lstlisting}
+            
+        Needless to say, you should replace gpa with your variable name; however, the rest should not be changed.
+    \end{itemize}
+\end{itemize}
+
+Additionally, whenever the table is doubled there should be a "table doubled" string printed to stdout. As
+this event happens after inserts, the statement should be printed in the line after the output from
+the corresponding insert. For example in the sample input the table doubles after the third
+insertion and the corresponding insert statement is present on the next line after the output of the insert statement.
+
+\subsection*{Example}
+\underline{\textbf{Sample Input}}\\
+insert 8670959 asad 3.9\\
+insert 7670931 victor 3.6\\
+insert 7636338 omid 4.0\\
+lookup 7636338\\
+insert 5712195 jin 2.5\\
+print\\
+delete 4444444\\
+delete 5712195\\
+print\\
+delete 7636338\\
+lookup 8670959\\
+delete 8670959\\
+print\\
+
+\noindent\underline{\textbf{Sample Output}}\\
+item successfully inserted\\
+item successfully inserted\\
+item successfully inserted\\
+item found; omid 4\\
+item successfully inserted\\
+table doubled\\
+(7670931,victor,3.6)(5712195,jin,2.5)(8670959,asad,3.9)(7636338,omid,4.0)\\
+item not present in the table\\
+item successfully deleted\\
+(7670931,victor,3.6)(8670959,asad,3.9)(7636338,omid,4.0)\\
+item successfully deleted\\
+item found; asad 3\\
+item successfully deleted\\
+(7670931,victor,3.6)\\
+
+The TA/Readers should be able to run your program as "prog1" with input from stdin. Be sure to include a Makefile, and name the executable prog1. The TA/Readers should be able to terminate your program by Ctrl+D (EOF for linux) or Ctrl+Z (EOF for windows).\\
+
+The programs are tested automatically so make sure that you provide the output exactly as specified and shown above with no extra space or extra lines to the output. The program should output to stdout. The input provided above is the subset of the input your program would be
+tested against. So be sure to check your program exhaustively for different cases.\\
+
+A suggestion while testing the program is to take the sample output in a file and then save your output (you can either redirect it to a file when outputting to stdout or copy
+from output screen) in a separate file and run a diff command against the two outputs to make sure they match exactly.\\
+
+\textbf{Note:} Last but not least, this project should be implemented individually. Also, please do not share your codes with each other. Submission process will be announced on Piazza website shortly.
+
+%You should test that the makefile is such that you are able to compile your code and produce the specified object file by running the command "make" on a csil machine in the folder your implementation files are present. This programming assignment has to be implemented in C++.
+
+%\subsection*{Submission}
+%Deliver the assignment using turnin before midnight on the due date. You need to submit all the files having your implementation and a ‘Makefile’ using turnin command. Name your main file, either htable.cpp. The assignment is to be done on an individual basis not in groups.\\
+
+%\textbf{Note:} Name your Makefile as "Makefile". Naming the Makefile wrong will cause auto grader to fail and will lead to deduction of points. You may choose to name other files of your implementation differently (not recommended) but the executable should be named explicitly, as specified above.\\
+
+%\noindent The command to be used is:\\\\
+%\textit{turnin pa1@cs130a [list of files to be submitted] Sample TURNIN procedure:\\
+%Login to your csil account.\\
+%Create a directory called cs130a\\
+%Create a directory called pa1 inside \textasciitilde/cs130\\
+%Put your files inside \textasciitilde/cs130a/pa1. Your main file having the implementation will be named
+%htable.cpp\\
+%Inside the directory \textasciitilde/cs130a/pa1 run the command:\\
+%\$turnin pa1@cs130a htable.cpp Makefile}
+
+\end{document}
