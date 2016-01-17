@@ -63,7 +63,7 @@ Your task in this project is to do the following:
     \item Collisions should be resolved through 2 following methods,
     \begin{enumerate}
         \item Linear probing: When searching for key $k$, in linear probing algorithm we examine the cell with index $h = hash(k);$ and increment $h$ until we find a value of $h$ for which the cell is free or contains the given key.
-        \item Double hashing: When searching for key $k$, in double hashing algorithm we first examine the cell with the same index as linear probing $h = hash1(k)$; nevertheless, another hash function is incrementally be added as follows:
+        \item Double hashing: When searching for key $k$, in double hashing algorithm we first examine the cell with the same index as linear probing $h = hash1(k)$; nevertheless, another hash function is incrementally be added as follows:\\
         $h = \Big(hash1(k) + i * hash2(k)\Big) \% TABLE\_SIZE;$
     \end{enumerate}
 
@@ -78,12 +78,12 @@ Your task in this project is to do the following:
 \subsection*{Required Functionality}
 Your hash table is supposed to support the following operations:\\
 \begin{itemize}
-    \item Insert(key,value): Insert an entry into the hashtable. Your program should return either "item successfully inserted," or "item already present."\\
+    \item insert(key,value): Insert an entry into the hashtable. Your program should return either "item successfully inserted," or "item already present."\\
     
     \item lookup(key): Use the hash table to determine if key is in the data structure and print its associated value and also the position separated by a single space (see the example below).
     Your program should return either "item found; [value] [position]" or "item not found." See sample output below. Positions should be array indexed (beginning with 0)\\
     
-    \item delete(key): Use the hash table to determine where key is, delete it from the hash table. Your program should return either "item successfully deleted" or "item not present in the table."\\
+    \item remove(key): Use the hash table to determine where key is, delete it from the hash table. Your program should return either "item successfully deleted" or "item not present in the table."\\
     
     \item print(): Print out the hash table (in the array format). For empty spots in the hash table, don't print anything.
     
