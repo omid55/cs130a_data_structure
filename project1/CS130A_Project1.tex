@@ -67,7 +67,7 @@ Your task in this project is to do the following:
         $h = \Big(hash1(k) + i * hash2(k)\Big) \% TABLE\_SIZE;$
     \end{enumerate}
 
-    \item Use the following hash functions:\\ \textit{hash1}($k$) = ($k$ \% $492113$) \% $TABLE\_SIZE$\\ \textit{hash1}($k$) = ($k$ \% $392113$) \% $TABLE\_SIZE$\\
+    \item Use the following hash functions:\\ \textit{hash1}($k$) = ($k$ \% $492113$) \% $TABLE\_SIZE$\\ \textit{hash2}($k$) = ($k$ \% $392113$) \% $TABLE\_SIZE$\\
     Think about why this hash function might be suitable for this application?
 
     \item Deletions should be supported through the \textbf{lazy deletion} method
@@ -127,6 +127,7 @@ the corresponding insert. For example in the sample input the table doubles afte
 insertion and the corresponding insert statement is present on the next line after the output of the insert statement.
 
 \subsection*{Example}
+Although you should implement both, in the following, we describe an example merely for linear probing.\\
 \underline{\textbf{Sample Input}}\\
 insert 8670959 asad 3.9\\
 insert 7670931 victor 3.6\\
