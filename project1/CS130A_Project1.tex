@@ -64,13 +64,16 @@ Your task in this project is to do the following:
     \begin{enumerate}
         \item Linear probing: When searching for key $k$, in linear probing algorithm we examine the cell with index $h = hash(k);$ and increment $h$ until we find a value of $h$ for which the cell is free or contains the given key.
         \item Double hashing: When searching for key $k$, in double hashing algorithm we first examine the cell with the same index as linear probing $h = hash1(k)$; nevertheless, another hash function is incrementally be added as follows:\\
-        $h = \Big(hash1(k) + i * hash2(k)\Big) \% TABLE\_SIZE;$
+        $h = \Big(hash1(k) + i * hash2(k)\Big) \%TABLE\_SIZE;$
     \end{enumerate}
+    ** \textbf{Note: }$i$ is the iteration time. First $i=0$ and if there was a collision, we increment it while there is a vacant or deleted place.\\
+    *** \textbf{Note: }Your program should input data from stdin (for instance with cin command in C++).\\
+    *** \textbf{Note: }There is a possibility to change collision solving method by entering string "linearprobing" or "doublehashing" in the input. You can find it in example. In default, if there was no input regarding collision method, your hashtable should use linear probing policy.
 
     \item Use the following hash functions:\\ \textit{hash1}($k$) = ($k$ \% $492113$) \% $TABLE\_SIZE$\\ \textit{hash2}($k$) = ($k$ \% $392113$) \% $TABLE\_SIZE$\\
     Think about why this hash function might be suitable for this application?
 
-    \item Deletions should be supported through the \textbf{lazy deletion} method
+    \item Deletions should be supported through the \textbf{lazy deletion} method. You can change key with something that never is going to be placed there as a perm number (for instance -10).
     
     \item Dynamic Resizing should be supported such that the table size should be doubled if the load factor crosses over 0.7. Check if resizing is needed after inserting an element. When you resize, you should rehash the elements of the table in the order they are stored in the table (going from index 0 to index TABLE\_SIZE-1)
 \end{itemize}
@@ -78,12 +81,12 @@ Your task in this project is to do the following:
 \subsection*{Required Functionality}
 Your hash table is supposed to support the following operations:\\
 \begin{itemize}
-    \item insert(key,value): Insert an entry into the hashtable. Your program should return either "item successfully inserted," or "item already present."\\
+    \item insert(key,value): insert an entry into the hashtable. Your program should return either "item successfully inserted" or "item already present"\\
     
     \item lookup(key): Use the hash table to determine if key is in the data structure and print its associated value and also the position separated by a single space (see the example below).
-    Your program should return either "item found; [value] [position]" or "item not found." See sample output below. Positions should be array indexed (beginning with 0)\\
+    Your program should return either "item found; [value] [position]" or "item not found" See sample output below. Positions should be array indexed (beginning with 0)\\
     
-    \item remove(key): Use the hash table to determine where key is, delete it from the hash table. Your program should return either "item successfully deleted" or "item not present in the table."\\
+    \item remove(key): Use the hash table to determine where key is, delete it from the hash table. Your program should return either "item successfully deleted" or "item not present in the table"\\
     
     \item print(): Print out the hash table (in the array format). For empty spots in the hash table, don't print anything.
     
@@ -92,12 +95,12 @@ Your hash table is supposed to support the following operations:\\
     command) information after each operation, as follows:
     
     \begin{itemize}
-        \item Insert(key,value): "item successfully inserted" or "item already present"
+        \item insert(key,value): "item successfully inserted" or "item already present"
         
         \item lookup(key): "item found; [value] [position]" or "item not found"
         (for instance after finding Kevin in index 5th, the string would be "item found; Kevin 5")
         
-        \item delete(key): "item successfully deleted" or "item not present in the table"
+        \item remove(key): "item successfully deleted" or "item not present in the table"
         
         \item print(): prints out the whole hash table on the same line as two tuples of the format without space (int,string,double) as follows:\\
         (1234,name1,gpa1)(2345,name2,gpa2)(3456,name3,gpa3)\\\\
@@ -129,6 +132,7 @@ insertion and the corresponding insert statement is present on the next line aft
 \subsection*{Example}
 Although you should implement both, in the following, we describe an example merely for linear probing.\\
 \underline{\textbf{Sample Input}}\\
+linearprobing\\
 insert 8670959 asad 3.9\\
 insert 7670931 victor 3.6\\
 insert 7636338 omid 4.0\\
@@ -165,7 +169,7 @@ The programs are tested automatically so make sure that you provide the output e
 tested against. So be sure to check your program exhaustively for different cases.\\
 
 A suggestion while testing the program is to take the sample output in a file and then save your output (you can either redirect it to a file when outputting to stdout or copy
-from output screen) in a separate file and run a diff command against the two outputs to make sure they match exactly.\\
+from output screen) in a separate file and run a d	iff command against the two outputs to make sure they match exactly.\\
 
 \textbf{Note:} Last but not least, this project should be implemented individually. Also, please do not share your codes with each other. Submission process will be announced on Piazza website shortly.
 
