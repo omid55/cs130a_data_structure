@@ -1,3 +1,4 @@
+%Omid55
 \documentclass[times, 12pt]{article}
 \usepackage{graphicx}
 \oddsidemargin  0pt
@@ -11,6 +12,7 @@
 
 \usepackage{listings}
 \usepackage{color}
+\usepackage{hyperref}
 
 \definecolor{mygray}{rgb}{0.4,0.4,0.4}
 \definecolor{mygreen}{rgb}{0,0.8,0.6}
@@ -39,7 +41,7 @@ cloud based applications. Commonly, each data item has a uniquely identifying ke
 value. Values can vary in size and type based on the application. In this programming
 project, we want to build a data structure which allows us to search and retrieve efficiently (both in time and in space) particular values given keys, not necessary in an ordered manner. For such applications, hash tables come in very handy.
 
-We will take the application of students' information retrieval for our hash table. The key-value pairs that will be used in this assignment are of the type (int, Student), where the int will be the 7 or less digits as the perm\# which is unique for each student, and Student is a class defining each student in the university with name (string) and GPA (double).
+We will take the application of students' information retrieval for our hash table. The key-value pairs that will be used in this assignment are of the type (int, Student), where the int will be the 7 or less digits as the perm\# which is \textbf{UNIQUE} for each student, and Student is a class defining each student in the university with name (string) and GPA (double).
 
 \begin{lstlisting}
     #include <string>
@@ -68,7 +70,7 @@ Your task in this project is to do the following:
     \end{enumerate}
     ** \textbf{Note: }$i$ is the iteration time. First $i=0$ and if there was a collision, we increment it while there is a vacant or deleted place.\\
     *** \textbf{Note: }Your program should input data from stdin (for instance with cin command in C++).\\
-    *** \textbf{Note: }There is a possibility to change collision solving method by entering string "linearprobing" or "doublehashing" in the input. You can find it in example. In default, if there was no input regarding collision method, your hashtable should use linear probing policy.
+    *** \textbf{Note: }There is a possibility to change collision solving method by entering string "linearprobing" or "doublehashing" in the input. You can find it in example. In default, if there was no input regarding collision method, your hashtable should use linear probing policy. We consider in input, we merely modify the collision policy once in the beginning and do not change it in the middle of test case.
 
     \item Use the following hash functions:\\ \textit{hash1}($k$) = ($k$ \% $492113$) \% $TABLE\_SIZE$\\ \textit{hash2}($k$) = ($k$ \% $392113$) \% $TABLE\_SIZE$\\
     Think about why this hash function might be suitable for this application?
@@ -127,7 +129,10 @@ Your hash table is supposed to support the following operations:\\
 Additionally, whenever the table is doubled there should be a "table doubled" string printed to stdout. As
 this event happens after inserts, the statement should be printed in the line after the output from
 the corresponding insert. For example in the sample input the table doubles after the third
-insertion and the corresponding insert statement is present on the next line after the output of the insert statement.
+insertion and the corresponding insert statement is present on the next line after the output of the insert statement.\\
+
+\textbf{***Note:} When you make the size of table doubled, you have to find \textbf{the smallest prime number larger than the doubled size}. Namely, if the size of table is 5, after doubling, it should be 11 (the smallest prime number greater than 2 * 5). Also, before doubling, you have to check whether the new item already exists or not. If it already exists, you should not double the size of table. You merely double size of table when are certain that new item will be placed in the hashtable. Also, incontrovertibly after doubling, you have to rehash all items inside of hashtable.
+
 
 \subsection*{Example}
 Although you should implement both, in the following, we describe an example merely for linear probing.\\
@@ -152,14 +157,14 @@ item successfully inserted\\
 item successfully inserted\\
 item successfully inserted\\
 item found; omid 4\\
-item successfully inserted\\
 table doubled\\
-(7670931,victor,3.6)(5712195,jin,2.5)(8670959,asad,3.9)(7636338,omid,4.0)\\
+item successfully inserted\\
+(7670931,victor,3.6)(7636338,omid,4)(5712195,jin,2.5)(8670959,asad,3.9)\\
 item not present in the table\\
 item successfully deleted\\
-(7670931,victor,3.6)(8670959,asad,3.9)(7636338,omid,4.0)\\
+(7670931,victor,3.6)(7636338,omid,4)(8670959,asad,3.9)\\
 item successfully deleted\\
-item found; asad 3\\
+item found; asad 8\\
 item successfully deleted\\
 (7670931,victor,3.6)\\
 
@@ -173,21 +178,15 @@ from output screen) in a separate file and run a d	iff command against the two o
 
 \textbf{Note:} Last but not least, this project should be implemented individually. Also, please do not share your codes with each other. Submission process will be announced on Piazza website shortly.
 
-%You should test that the makefile is such that you are able to compile your code and produce the specified object file by running the command "make" on a csil machine in the folder your implementation files are present. This programming assignment has to be implemented in C++.
+\textbf{***Note:} You should use "Main.cpp" file along with this project description and implement its functions. You may change it with your own function names or so; nonetheless, you should not change its input commands.
 
-%\subsection*{Submission}
-%Deliver the assignment using turnin before midnight on the due date. You need to submit all the files having your implementation and a ‘Makefile’ using turnin command. Name your main file, either htable.cpp. The assignment is to be done on an individual basis not in groups.\\
 
-%\textbf{Note:} Name your Makefile as "Makefile". Naming the Makefile wrong will cause auto grader to fail and will lead to deduction of points. You may choose to name other files of your implementation differently (not recommended) but the executable should be named explicitly, as specified above.\\
+\subsection*{Submission}
+In order to submit your codes, you should login to \href{https://submit.cs.ucsb.edu/}{Submit System} using your umail email and CS password. In project "CS130A Project 1 Hashing", press Make Submission button and then you can send 5 files with the following names:\\
+"Main.cpp", "Hashtable.cpp", "Hashtable.h", "Student.cpp", "Student.h"\\
+System has the ability that show your output and its difference with the desired one. Hence, you can debug your code and also get a sense of how your project is going to grade.
 
-%\noindent The command to be used is:\\\\
-%\textit{turnin pa1@cs130a [list of files to be submitted] Sample TURNIN procedure:\\
-%Login to your csil account.\\
-%Create a directory called cs130a\\
-%Create a directory called pa1 inside \textasciitilde/cs130\\
-%Put your files inside \textasciitilde/cs130a/pa1. Your main file having the implementation will be named
-%htable.cpp\\
-%Inside the directory \textasciitilde/cs130a/pa1 run the command:\\
-%\$turnin pa1@cs130a htable.cpp Makefile}
+\subsection*{Extra Points}
+Do a empirical test to compare the aforementioned collision solving policies with respect to time complexity. Plot a figure with increasing number of samples in x axis and time of insert and lookup all items in y axis. To compare them easily, draw both methods' trend in one figure. You can use MATLAB or any other software to plot figure. Give a succinct explanation regarding which method is better. The report should be submitted via \href{https://gauchospace.ucsb.edu/courses/mod/assign/view.php?id=515121}{Gauchospace} containing a figure and a terse explanation.
 
 \end{document}
