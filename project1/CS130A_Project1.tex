@@ -64,7 +64,7 @@ Your task in this project is to do the following:
     
     \item Collisions should be resolved through 2 following methods,
     \begin{enumerate}
-        \item Linear probing: When searching for key $k$, in linear probing algorithm we examine the cell with index $h = hash(k);$ and increment $h$ until we find a value of $h$ for which the cell is free or contains the given key.
+        \item Linear probing: When searching for key $k$, in linear probing algorithm we examine the cell with index $h = hash1(k);$ and increment $h$ until we find a value of $h$ for which the cell is free or contains the given key.
         \item Double hashing: When searching for key $k$, in double hashing algorithm we first examine the cell with the same index as linear probing $h = hash1(k)$; nevertheless, another hash function is incrementally be added as follows:\\
         $h = \Big(hash1(k) + i * hash2(k)\Big) \%TABLE\_SIZE;$
     \end{enumerate}
