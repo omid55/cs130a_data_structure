@@ -28,16 +28,16 @@ vector<string> split(string str, char delimiter)
 int main()
 {
 	ifstream f;
-	f.open("/home/omid55/PythonProjects/RecordGenerator/Generated1.txt", ios::in);
+	int l = 0;
+	f.open("/home/omid/PythonProjects/Generated1.txt", ios::in);
 	if(!f) cerr << "File not found" << endl;
 	else
 	{
-		while(!f.eof())
+		string line;
+		while(std::getline(f, line))
 		{
-			string line;
-			std::getline(f, line);
 			vector<string> words = split(line, ',');
-			// ... TO DO
+			cout << ++l << endl;
 		}
 	}
 	return 0;
