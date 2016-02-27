@@ -78,7 +78,7 @@ You have to implement and maintain the following data structures:
 \subsection{Friendship Graph}
 The graph that models the social network graph should be implemented using a {\em generalization} of an adjacency list. An adjacency list is an array of a defined type (for instance GraphNode) that has a key, a linked list of friends and a pointer to the corresponding entry in the Profile Data in the file.
 We also need a hash function to map a user's name to the corresponding index in the aforementioned array (graph array). %Thus, the graph can be modelled with a hash table say <string, int> which is mapping a name to an index (starting from 0) and an array of nodes say\\
-{\bf Hence, this data structure is really a merge of an adjacency list and a hash table.} Please see Figure~1 for an illustration of the hash and graph representation data structures with 4 users.  For collisions you can use {\bf linear probing}.  Furthermore, note we are {\bf not} asking you to support the {\em delete} operation or the rehash.  You can assume that the system will have at most 100 users, so, your adjacency list/hash table should be of size 201 (the smallest prime just bigger than 2 * 100, which ensures that the hash table is half full for better overall performance).  Of course during your testing phase you can use smaller sized tables.
+{\bf Hence, this data structure is really a merge of an adjacency list and a hash table.} Please see Figure~1 for an illustration of the hash and graph representation data structures with 4 users.  For collisions you can use {\bf linear probing}.  Furthermore, note we are {\bf not} asking you to support the {\em delete} operation or the rehash.  You can assume that the system will have at most 100 users, so, your adjacency list/hash table should be of size 211 (the smallest prime just bigger than 2 * 100, which ensures that the hash table is half full for better overall performance).  Of course during your testing phase you can use smaller sized tables.
 
 %\begin{lstlisting}[language=C++,
  %   directivestyle={\color{black}}
@@ -111,14 +111,14 @@ We also need a hash function to map a user's name to the corresponding index in 
     emph={int,char,double,float,unsigned},
     emphstyle={\color{green}}
    ]
-int hash(string str, int seed=0)
+int hash(string str, int seed = 0)
 {
-   int hash = seed;
+    int hash = seed;
     for(int i=0;i<str.length();i++)
     {
-        hash = hash * 101  +  str[i];
+        hash = (hash * 101  +  str[i]) % TABLE_SIZE;
     }
-    return hash % TABLE_SIZE;
+    return hash;
 }
 \end{lstlisting}
 
